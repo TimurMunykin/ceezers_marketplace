@@ -12,8 +12,8 @@ const CartPage: React.FC = () => {
       <h1 className="text-2xl font-bold mb-4">Shopping Cart</h1>
       {cartItems.length > 0 ? (
         <div>
-          {cartItems.map((item, index) => (
-            <CartItem key={index} item={item} />
+          {cartItems.map((item) => (
+            <CartItem key={item.project.id} item={item} />
           ))}
           <CartSummary cartItems={cartItems} />
         </div>
