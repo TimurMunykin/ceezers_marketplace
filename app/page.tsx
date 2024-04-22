@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import CartContext from './context/cartContext';
 import { CarbonProject } from '@/types';
 import Card from './card';
+import { MarketplaceSummary } from './marketplaceSummary';
 
 export default function Home() {
   const { data, isLoading, isError, error } = useQuery<CarbonProject[]>({
@@ -49,17 +50,3 @@ export default function Home() {
     </>
   );
 }
-
-
-const MarketplaceSummary: React.FC<{ projects: CarbonProject[] }> = ({ projects }) => {
-  const totalVolume = projects.reduce((sum, project) => sum + project.offered_volume_in_tons, 0);
-  const averagePrice = projects.reduce((sum, project) => sum + project.price_per_ton, 0) / projects.length;
-
-  return (
-    <div className="text-center p-4">
-      <h2 className="text-2xl font-bold">Market Summary</h2>
-      <p>Total Available Volume: {totalVolume} tons</p>
-      <p>Average Price per Ton: ${averagePrice.toFixed(2)}</p>
-    </div>
-  );
-};
