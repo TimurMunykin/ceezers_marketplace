@@ -1,10 +1,8 @@
 "use client"
 import React, { createContext, useReducer, ReactNode } from "react";
 import { CartItem } from "@/types";
-
-type CartAction =
-  | { type: 'ADD_ITEM'; payload: CartItem }
-  | { type: 'REMOVE_ITEM'; payload: { id: number } };
+import { CartAction } from "./cartActions";
+import { cartReducer } from "./cartReducer";
 
 interface CartState {
   cartItems: CartItem[];
@@ -18,17 +16,6 @@ const defaultState: CartState = {
 };
 
 const CartContext = createContext<CartState>(defaultState);
-
-const cartReducer = (state: CartItem[], action: CartAction): CartItem[] => {
-  switch (action.type) {
-    case 'ADD_ITEM':
-      return [...state, action.payload];
-    case 'REMOVE_ITEM':
-      return state.filter(item => item.project.id !== action.payload.id);
-    default:
-      return state;
-  }
-};
 
 interface CartProviderProps {
   children: ReactNode;
